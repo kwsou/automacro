@@ -26,6 +26,12 @@ Now run it as a standalone node app.
 node app.js
 ```
 
+You can also pass in a config file instead of passing in the settings manually via the CLI.
+
+```
+node app.js --config "./config/default.json"
+```
+
 ### Potential Todos
 
 This is mostly for my own personal use, but you can use if you have a need for it. Probably will make it a proper desktop app with Electron later or something but for now the bare minimum works on the CLI.
