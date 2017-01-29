@@ -47,4 +47,4 @@ Temporary Items
 .apdisk
 
 # nodejs and npm related
-node_modules/
+node_modules/ 

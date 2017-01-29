@@ -5,10 +5,19 @@ var prettyMs = require('pretty-ms');
 var util = require('./util');
 var log = require('./log');
 
-var start = function() {
+var start = function(optConfig) {
     var deferred = q.defer();
     
-    _init().then(function(config) {
+    var initDeferred = q.defer();
+    if(!optConfig) {
+        _init().then(function(commandLineConfig) {
+            initDeferred.resolve(commandLineConfig);
+        });
+    } else {
+        initDeferred.resolve(optConfig);
+    }
+    
+    initDeferred.promise.then(function(config) {
         log.write('Got it. Starting in ');
         util.startCountdown(3000, function() {
             log.writeLine('');
@@ -84,7 +93,7 @@ var _init = function() {
 };
 
 var _start = function(config) {
-    robot.setMouseDelay(1000);
+    robot.setMouseDelay(250);
     
     var totalTimeElapsed = 0;
     var totalSynthsMade = 0;
@@ -135,7 +144,7 @@ var initiateCraft = function(config) {
     
     setTimeout(function() {
         deferred.resolve();
-    }, 500);
+    }, 1250);
     
     return deferred.promise;
 };
@@ -154,7 +163,7 @@ var performCraft = function(config) {
         } else {
             setTimeout(function() {
                 deferred.resolve();
-            }, 1500);
+            }, config.isCollectable ? 1000 : 1500);
         }
     };
     performNextMacro();
@@ -169,7 +178,7 @@ var confirmCollectable = function(config) {
     
     setTimeout(function() {
         deferred.resolve();
-    }, 1000);
+    }, 2000);
     
     return deferred.promise;
 };
