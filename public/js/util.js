@@ -1,6 +1,31 @@
 var log = require('./log');
-var q = require('q');
+var promise = require('bluebird');
 var prompt = require('prompt');
+var winctl = require('winctl');
+
+var swapFocusedWindow = function(onSwapCallback, onSwapCallbackArgs) {
+    return new promise(function(resolve) {
+        var prevActiveProcess = winctl.GetActiveWindow().getPid();
+        var filterPrevActiveProcess = function(win) { return win.getPid() == prevActiveProcess; };
+        var filterFFXIVProcess = function(win) { return win.getClassName() == 'FFXIVGAME'; };
+        
+        // switch to the ffxiv game before doing any actions, then swap back
+        // to the previously focused process
+        winctl.FindWindows(filterFFXIVProcess).then(function(ffxivWindows) {
+            if(ffxivWindows.length > 0) {
+                ffxivWindows[0].setForegroundWindow();
+            }
+            onSwapCallback(onSwapCallbackArgs).then(function(payload) {
+                winctl.FindWindows(filterPrevActiveProcess).then(function(prevActiveWindows) {
+                    if(prevActiveWindows.length > 0) {
+                        prevActiveWindows[0].setForegroundWindow();
+                    }
+                    resolve(payload);
+                });
+            });
+        });
+    });
+};
 
 var startCountdown = function(duration, callback, callbackArgs) {
     _cd(duration, 1000, callback, callbackArgs);
@@ -19,57 +44,36 @@ var _cd = function(duration, interval, callback, callbackArgs) {
 };
 
 var promptForString = function(promptQuestion) {
-    var deferred = q.defer();
-    
-    var schema = {
+    return _prompt({
         properties: {
             'enter in a string': {
                 type: 'string',
                 required: true
             }
         }
-    }
-    _prompt(schema, promptQuestion, ' ', _forwardValue).then(function(convertedVal) {
-        deferred.resolve(convertedVal);
-    });
-    
-    return deferred.promise;
+    }, promptQuestion, ' ', _forwardValue);
 };
 
 var promptForNumber = function(promptQuestion) {
-    var deferred = q.defer();
-    
-    var schema = {
+    return _prompt({
         properties: {
             'enter in a number': {
                 type: 'number',
                 required: true
             }
         }
-    }
-    _prompt(schema, promptQuestion, ' ', Number).then(function(convertedVal) {
-        deferred.resolve(convertedVal);
-    });
-    
-    return deferred.promise;
+    }, promptQuestion, ' ', Number);
 };
 
 var promptForBoolean = function(promptQuestion) {
-    var deferred = q.defer();
-    
-    var schema = {
+    return _prompt({
         properties: {
             'enter in true or false': {
                 type: 'boolean',
                 required: true
             }
         }
-    }
-    _prompt(schema, promptQuestion, ' ', _forwardValue).then(function(convertedVal) {
-        deferred.resolve(convertedVal);
-    });
-    
-    return deferred.promise;
+    }, promptQuestion, ' ', _forwardValue);
 };
 
 var _forwardValue = function(val) {
@@ -77,19 +81,18 @@ var _forwardValue = function(val) {
 };
 
 var _prompt = function(schema, message, delimiter, convertFn) {
-    var deferred = q.defer();
-    
-    prompt.start();
-    prompt.message = message;
-    prompt.delimiter = delimiter;
-    prompt.get(schema, function(err, result) {
-        deferred.resolve(convertFn(result[Object.keys(result)[0]]));
-    })
-    
-    return deferred.promise;
+    return new promise(function(resolve) {
+        prompt.start();
+        prompt.message = message;
+        prompt.delimiter = delimiter;
+        prompt.get(schema, function(err, result) {
+            resolve(convertFn(result[Object.keys(result)[0]]));
+        })
+    });
 };
 
 // expose public methods
+exports.swapFocusedWindow = swapFocusedWindow;
 exports.startCountdown = startCountdown;
 exports.promptForString = promptForString;
 exports.promptForNumber = promptForNumber;
