@@ -5,12 +5,13 @@
     "main": "app.js",
     "dependencies": {
         "bluebird": "^3.4.7",
+        "node-notifier": "^5.0.2",
         "minimist": "^1.2.0",
+        "play-sound": "^1.1.1",
         "pretty-ms": "^2.1.0",
         "prompt": "^1.0.0",
         "robotjs": "^0.4.5",
-        "winctl": "^1.0.2",
-        "bluebird": "^3.4.7"
+        "winctl": "^1.0.2"
     },
     "devDependencies": {},
     "scripts": {
