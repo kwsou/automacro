@@ -1,0 +1,6 @@
+/* Styles to overwrite default css styles imposed by React Desktop */
+
+/* navigation pane items have a fixed height */
+div#root div div:nth-child(2) div div:first-child a {
+    height: 50px !important;
+}
