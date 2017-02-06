@@ -1,12 +1,25 @@
+// Main App driver
 import electron from 'electron';
-import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
+import React from 'react';
 import { matchPath, withRouter } from 'react-router';
 import { Window, TitleBar, NavPane, NavPaneItem, Button } from 'react-desktop/windows';
+import { Route } from 'react-router-dom';
+import path from 'path';
 
-import env from './env';
-import { Home, Settings } from './views';
-import * as Icons from './assets/icons';
+// set global function to resolve local file names so we can avoid ugly relative paths like this: require('../../src/herpa/derp')
+// base path is /src. ECMA 6 compatible
+global.REQUIRE_LOCAL = filepath => {
+    var pkg = require(path.join(__dirname, '/', filepath));
+    if(pkg.default) {
+        return pkg.default;
+    }
+    return pkg;
+};
+
+let AppContext  = REQUIRE_LOCAL('core/common/AppContext');
+let Home        = REQUIRE_LOCAL('views/Home');
+let Settings    = REQUIRE_LOCAL('views/Settings');
+let Icons       = REQUIRE_LOCAL('assets/icons');
 
 const routes = [
     {
@@ -24,12 +37,7 @@ const routes = [
     }
 ];
 
-class App extends Component {
-    static defaultProps = {
-        theme: 'light',
-        color: '#42F5FF',
-    }
-
+class App extends React.Component {
     toggleMaximize = function() {
         var window = electron.remote.getCurrentWindow();
         if(!window.isMaximized()) {
@@ -40,11 +48,11 @@ class App extends Component {
     }
     
     render() {
-        const { replace, location, theme, color } = this.props;
+        const { replace, location } = this.props;
         
         return (
-            <Window theme={theme} color={color}>
-            <TitleBar title="Automacro" controls
+            <Window theme={AppContext.ui.theme} color={AppContext.ui.primaryColour}>
+            <TitleBar title={AppContext.app.name} controls
                 onCloseClick={() => {
                     electron.remote.getCurrentWindow().close();
                 }}
@@ -54,7 +62,7 @@ class App extends Component {
                 onMaximizeClick={this.toggleMaximize}
                 onRestoreDownClick={this.toggleMaximize}
             />
-            <NavPane theme={theme} color={color} paneExpandedLength="120px">
+            <NavPane paneExpandedLength="120px">
                 {routes.map(route => (
                     <NavPaneItem
                         key={route.path}
@@ -66,8 +74,6 @@ class App extends Component {
                         onSelect={() => {
                             replace(route.path);
                         }}
-                        color={color}
-                        theme="dark"
                         push
                     >
                         <Route exact={route.exact} path={route.path} component={route.component} />
@@ -80,7 +86,7 @@ class App extends Component {
     }
     
     renderRefreshButton() {
-        if(env.IS_DEV_MODE && false) {
+        if(AppContext.env.IS_DEV_MODE && false) {
             return <Button push onClick={() => electron.remote.getCurrentWindow().reload()}>R</Button>;
         }
         return <div/>;

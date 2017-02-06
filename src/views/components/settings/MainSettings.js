@@ -4,19 +4,15 @@ import {
     Label,
     Radio
 } from 'react-desktop/windows';
-import { default as ViewContent } from '../common/ViewContent';
-import { default as InputEntry } from '../common/InputEntry';
+
+let AppContext      = REQUIRE_LOCAL('core/common/AppContext');
+let ContentView     = REQUIRE_LOCAL('views/components/common/ContentView');
+let InputEntry      = REQUIRE_LOCAL('views/components/common/InputEntry');
 
 class MainSettings extends React.Component {
-    static defaultProps = {
-        theme: 'light'
-    }
-    
-    render() {
-        const { theme, color } = this.props;
-        
+    render() {        
         return (
-            <ViewContent>
+            <ContentView>
                 <InputEntry title="Theme" desc="Select a GUI colour theme.">
                     <Radio
                         label="Light"
@@ -32,7 +28,7 @@ class MainSettings extends React.Component {
                         defaultValue="Light"
                     />
                 </InputEntry>
-            </ViewContent>
+            </ContentView>
         );
     }
 }

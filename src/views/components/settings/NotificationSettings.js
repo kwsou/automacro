@@ -5,19 +5,15 @@ import {
     Checkbox,
     TextInput
 } from 'react-desktop/windows';
-import { default as ViewContent } from '../common/ViewContent';
-import { default as InputEntry } from '../common/InputEntry';
+
+let AppContext      = REQUIRE_LOCAL('core/common/AppContext');
+let ContentView     = REQUIRE_LOCAL('views/components/common/ContentView');
+let InputEntry      = REQUIRE_LOCAL('views/components/common/InputEntry');
 
 class NotificationSettings extends React.Component {
-    static defaultProps = {
-        theme: 'light'
-    }
-    
     render() {
-        const { theme, color } = this.props;
-        
         return (
-            <ViewContent>
+            <ContentView>
                 <InputEntry title="Notifications" desc="When Automacro finishes its job.">
                     <Checkbox
                         label="Enable desktop notifications"
@@ -41,7 +37,7 @@ class NotificationSettings extends React.Component {
                         onChange={(e) => console.log(e)}
                     />
                 </InputEntry>
-            </ViewContent>
+            </ContentView>
         );
     }
 }

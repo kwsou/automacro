@@ -4,15 +4,14 @@ import {
     MasterDetailsView,
     MasterDetailsViewItem,
     MasterDetailsViewItemMaster,
-    MasterDetailsViewItemDetails,
-    Text
+    MasterDetailsViewItemDetails
 } from 'react-desktop/windows';
-import {
-    MainSettings,
-    RobotActionSettings,
-    NotificationSettings,
-    LoggingSettings
-} from './components/settings';
+
+let AppContext              = REQUIRE_LOCAL('core/common/AppContext');
+let MainSettings            = REQUIRE_LOCAL('views/components/settings/MainSettings');
+let RobotActionSettings     = REQUIRE_LOCAL('views/components/settings/RobotActionSettings');
+let NotificationSettings    = REQUIRE_LOCAL('views/components/settings/NotificationSettings');
+let LoggingSettings         = REQUIRE_LOCAL('views/components/settings/LoggingSettings');
 
 const categories = [
     {
@@ -34,22 +33,15 @@ const categories = [
 ];
 
 class Settings extends React.Component {
-    static defaultProps = {
-        theme: 'light',
-        color: '#FF4C42'
-    }
-    
     render() {
-        const { theme, color } = this.props;
-        
         return (
-            <MasterDetailsView theme={theme} color={color}>
+            <MasterDetailsView color={AppContext.ui.secondaryColour}>
                 {categories.map((category, i) => (
                     <MasterDetailsViewItem key={'settings' + i}>
                         <MasterDetailsViewItemMaster push width="150">
                             {category.title}
                         </MasterDetailsViewItemMaster>
-                        <MasterDetailsViewItemDetails>
+                        <MasterDetailsViewItemDetails color={AppContext.ui.teritaryColour}>
                             <Route component={category.component} />
                         </MasterDetailsViewItemDetails>
                     </MasterDetailsViewItem>

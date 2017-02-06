@@ -5,19 +5,15 @@ import {
     Checkbox,
     TextInput
 } from 'react-desktop/windows';
-import { default as ViewContent } from '../common/ViewContent';
-import { default as InputEntry } from '../common/InputEntry';
+
+let AppContext      = REQUIRE_LOCAL('core/common/AppContext');
+let ContentView     = REQUIRE_LOCAL('views/components/common/ContentView');
+let InputEntry      = REQUIRE_LOCAL('views/components/common/InputEntry');
 
 class LoggingSettings extends React.Component {
-    static defaultProps = {
-        theme: 'light'
-    }
-    
     render() {
-        const { theme, color } = this.props;
-        
         return (
-            <ViewContent>
+            <ContentView>
                 <InputEntry title="Logging" desc="Logs various events.">
                     <Checkbox
                         label="Enable logging"
@@ -32,7 +28,7 @@ class LoggingSettings extends React.Component {
                         onChange={(e) => console.log(e)}
                     />
                 </InputEntry>
-            </ViewContent>
+            </ContentView>
         );
     }
 }

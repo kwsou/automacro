@@ -5,19 +5,15 @@ import {
     Checkbox,
     Radio
 } from 'react-desktop/windows';
-import { default as ViewContent } from '../common/ViewContent';
-import { default as InputEntry } from '../common/InputEntry';
+
+let AppContext      = REQUIRE_LOCAL('core/common/AppContext');
+let ContentView     = REQUIRE_LOCAL('views/components/common/ContentView');
+let InputEntry      = REQUIRE_LOCAL('views/components/common/InputEntry');
 
 class RobotActionSettings extends React.Component {
-    static defaultProps = {
-        theme: 'light'
-    }
-    
     render() {
-        const { theme, color } = this.props;
-        
         return (
-            <ViewContent>
+            <ContentView>
                 <InputEntry title="Windows Control" desc="Automatically toggle the active process to the game before every programmed mouse click or key stroke.">
                     <Checkbox
                         label="Enable"
@@ -42,7 +38,7 @@ class RobotActionSettings extends React.Component {
                         defaultValue="Light"
                     />
                 </InputEntry>
-            </ViewContent>
+            </ContentView>
         );
     }
 }
