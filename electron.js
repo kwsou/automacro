@@ -8,15 +8,20 @@ let mainWindow;
 function createWindow() {
     // Create the browser window.
     mainWindow = new BrowserWindow({
-        width: 800,
-        height: 600,
-        minWidth: 700,
-        minHeight: 500,
+        show: false,
+        width: 850,
+        height: 500,
+        minWidth: 825,
+        minHeight: 475,
         frame: false
     });
     
     // and load the index.html of the app.
     mainWindow.loadURL(path.join('file://', __dirname, '/src/index.html') );
+    
+    mainWindow.once('ready-to-show', () => {
+        mainWindow.show();
+    })
     
     // Emitted when the window is closed.
     mainWindow.on('closed', () => {

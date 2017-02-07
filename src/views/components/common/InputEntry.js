@@ -11,11 +11,12 @@ class InputEntry extends React.Component {
     static defaultProps = {
         title: 'Sample Input Title',
         desc: 'Sample Input Description. Lengthy sentences.',
+        layout: 'vertical',
         icon: Icons.formIcon
     }
     
     render() {
-        const { theme, title, desc, icon } = this.props;
+        const { theme, title, desc, layout, icon } = this.props;
         
         return (
             <View style={styles.container}>
@@ -28,7 +29,7 @@ class InputEntry extends React.Component {
                         <Text color={AppContext.ui.textColour}>{desc}</Text>
                     </View>
                 </View>
-                <View layout="vertical" style={styles.rightBranch.container}>
+                <View layout={layout} style={styles.rightBranch.container}>
                     {this.props.children}
                 </View>
             </View>

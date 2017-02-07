@@ -4,12 +4,13 @@ import React from 'react';
 import { matchPath, withRouter } from 'react-router';
 import { Window, TitleBar, NavPane, NavPaneItem, Button } from 'react-desktop/windows';
 import { Route } from 'react-router-dom';
+
 import path from 'path';
 
 // set global function to resolve local file names so we can avoid ugly relative paths like this: require('../../src/herpa/derp')
 // base path is /src. ECMA 6 compatible
 global.REQUIRE_LOCAL = filepath => {
-    var pkg = require(path.join(__dirname, '/', filepath));
+    var pkg = require(path.join(__dirname, filepath));
     if(pkg.default) {
         return pkg.default;
     }
@@ -38,6 +39,13 @@ const routes = [
 ];
 
 class App extends React.Component {
+    constructor(props) {
+        super(props);
+        
+        // retrieve config file and load settings onto memory via AppContext
+        AppContext.importConfig(path.join(__dirname, '..'));
+    }
+    
     toggleMaximize = function() {
         var window = electron.remote.getCurrentWindow();
         if(!window.isMaximized()) {
@@ -52,7 +60,7 @@ class App extends React.Component {
         
         return (
             <Window theme={AppContext.ui.theme} color={AppContext.ui.primaryColour}>
-            <TitleBar title={AppContext.app.name} controls
+            <TitleBar title={AppContext.app.NAME} controls
                 onCloseClick={() => {
                     electron.remote.getCurrentWindow().close();
                 }}
@@ -62,7 +70,7 @@ class App extends React.Component {
                 onMaximizeClick={this.toggleMaximize}
                 onRestoreDownClick={this.toggleMaximize}
             />
-            <NavPane paneExpandedLength="120px">
+            <NavPane canPaneToggle={false} paneExpandedLength="120px">
                 {routes.map(route => (
                     <NavPaneItem
                         key={route.path}

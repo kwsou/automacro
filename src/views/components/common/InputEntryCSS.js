@@ -26,7 +26,7 @@ const styles = {
     rightBranch: {
         container: {
             width: '60%',
-            padding: '5px 0px 0px 10px'
+            padding: '10px 0px 0px 10px'
         }
     }
 };
