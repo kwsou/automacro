@@ -25,6 +25,7 @@ These instructions will get you a copy of the project up and running on your loc
 Get package dependencies.
 
 ```
+npm install -g electron-forge
 npm install
 ```
 
@@ -40,6 +41,12 @@ You can also pass in a config file instead of passing in the settings manually v
 
 ```
 node app.js --config "./config/default.json"
+```
+
+Work in progress desktop app:
+
+```
+npm start
 ```
 
 ### Potential Todos

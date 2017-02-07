@@ -1,16 +1,12 @@
 {
     "initiateCraft": {
-        "x": 1570,
-        "y": 889
+        "x": 1138,
+        "y": 860
     },
     "macroes": [
         {
             "key": "z",
-            "duration": 35000
-        },
-        {
-            "key": "x",
-            "duration": 12000
+            "duration": 40000
         }
     ],
     "isCollectable": true,
@@ -19,5 +15,5 @@
         "y": 792
     },
     "totalDuration": 0,
-    "totalSynths": 5
+    "totalSynths": 8
 }
