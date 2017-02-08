@@ -16,7 +16,7 @@ class InputEntry extends React.Component {
     }
     
     render() {
-        const { theme, title, desc, layout, icon } = this.props;
+        const { title, desc, layout, icon } = this.props;
         
         return (
             <View style={styles.container}>
@@ -25,8 +25,8 @@ class InputEntry extends React.Component {
                         {icon}
                     </View>
                     <View layout="vertical" style={styles.leftBranch.textSegment.container}>
-                        <Label style={styles.leftBranch.textSegment.title} color={AppContext.ui.textColour}>{title}</Label>
-                        <Text color={AppContext.ui.textColour}>{desc}</Text>
+                        <Label style={styles.leftBranch.textSegment.title} color={AppContext.ui.TEXT_COLOUR}>{title}</Label>
+                        <Text color={AppContext.ui.TEXT_COLOUR}>{desc}</Text>
                     </View>
                 </View>
                 <View layout={layout} style={styles.rightBranch.container}>

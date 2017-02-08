@@ -59,7 +59,7 @@ class App extends React.Component {
         const { replace, location } = this.props;
         
         return (
-            <Window theme={AppContext.ui.theme} color={AppContext.ui.primaryColour}>
+            <Window theme={AppContext.ui.THEME} color={AppContext.ui.PRIMARY_COLOUR}>
             <TitleBar title={AppContext.app.NAME} controls
                 onCloseClick={() => {
                     electron.remote.getCurrentWindow().close();

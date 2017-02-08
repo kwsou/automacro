@@ -22,8 +22,8 @@ class MainSettings extends React.Component {
     onThemeChange = (evt) => {
         var theme = evt.target.value;
         
-        if(theme != AppContext.ui.theme) {
-            AppContext.ui.theme = evt.target.value;
+        if(theme != AppContext.ui.THEME) {
+            AppContext.ui.THEME = evt.target.value;
             AppContext.exportConfig();
             electron.remote.getCurrentWindow().reload();
         }
@@ -40,7 +40,7 @@ class MainSettings extends React.Component {
                                 name="radio_theme"
                                 onChange={this.onThemeChange}
                                 defaultValue={theme.value}
-                                defaultChecked={AppContext.ui.theme == theme.value}
+                                defaultChecked={AppContext.ui.THEME == theme.value}
                             />
                         </InputContainer>
                     ))}

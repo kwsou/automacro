@@ -31,11 +31,11 @@ class AppContext {
         };
         
         this.ui = {
-            theme: this._setValue(config.settings.main.theme, 'light'),
-            primaryColour: '#87FF00',
-            secondaryColour: '#FF0087',
-            teritaryColour: '#0087FF',
-            textColour: '#000000'
+            THEME: this._setValue(config.settings.main.theme, 'light'),
+            PRIMARY_COLOUR: '#87FF00',
+            SECONDARY_COLOUR: '#FF0087',
+            TERITARY_COLOUR: '#0087FF',
+            TEXT_COLOUR: '#000000'
         };
         
         this.env = {
@@ -44,9 +44,9 @@ class AppContext {
         };
         
         // re-calculate some settings from the merge
-        switch(this.ui.theme) {
+        switch(this.ui.THEME) {
             case 'dark':
-                this.ui.textColour = '#FFFFFF';
+                this.ui.TEXT_COLOUR = '#FFFFFF';
                 break;
             case 'light':
             default:    // fall through
@@ -58,7 +58,7 @@ class AppContext {
         fs.write(this.app.CONFIG_PATH, ini.stringify({
             settings: {
                 main: {
-                    theme: this.ui.theme
+                    theme: this.ui.THEME
                 }
             }
         }));

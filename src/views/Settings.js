@@ -35,13 +35,13 @@ const categories = [
 class Settings extends React.Component {
     render() {
         return (
-            <MasterDetailsView color={AppContext.ui.secondaryColour}>
+            <MasterDetailsView color={AppContext.ui.SECONDARY_COLOUR}>
                 {categories.map((category, i) => (
                     <MasterDetailsViewItem key={'settings' + i}>
                         <MasterDetailsViewItemMaster push width="150">
                             {category.title}
                         </MasterDetailsViewItemMaster>
-                        <MasterDetailsViewItemDetails color={AppContext.ui.teritaryColour}>
+                        <MasterDetailsViewItemDetails color={AppContext.ui.TERITARY_COLOUR}>
                             <Route component={category.component} />
                         </MasterDetailsViewItemDetails>
                     </MasterDetailsViewItem>
