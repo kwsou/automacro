@@ -22,12 +22,15 @@ class AppContext {
         // if config is not of the right structure, we fix it before merging config settings
         config.settings = this._emptyObjectIfNonExistant(config.settings);
         config.settings.main = this._emptyObjectIfNonExistant(config.settings.main);
+        config.settings.robot_actions = this._emptyObjectIfNonExistant(config.settings.robot_actions);
 
         // merge settings
         this.app = {
             NAME: 'Automacro',
             ROOT_PATH: rootPath,
-            CONFIG_PATH: path.join(rootPath, CONFIG_FILE_NAME)
+            CONFIG_PATH: path.join(rootPath, CONFIG_FILE_NAME),
+            ENABLE_WINCTL: this._setValue(config.settings.robot_actions.enableWinctl, true),
+            DELAY_PRESET: this._setValue(config.settings.robot_actions.delayPreset, 'normal')
         };
         
         this.ui = {
@@ -59,6 +62,10 @@ class AppContext {
             settings: {
                 main: {
                     theme: this.ui.THEME
+                },
+                robot_actions: {
+                    enableWinctl: this.app.ENABLE_WINCTL,
+                    delayPreset: this.app.DELAY_PRESET
                 }
             }
         }));
