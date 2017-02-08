@@ -141,8 +141,10 @@ var initiateCraft = function(config) {
             return new promise(function(resolve) {
                 // get previous mouse position so that we can move cursor back after
                 var prevMousePosition = robot.getMousePos();
+                robot.setMouseDelay(250);
                 robot.moveMouse(config.initiateCraft.x, config.initiateCraft.y);
                 robot.mouseClick('left', true);
+                robot.setMouseDelay(10);
                 robot.moveMouse(prevMousePosition.x, prevMousePosition.y);
                 resolve();
             });
