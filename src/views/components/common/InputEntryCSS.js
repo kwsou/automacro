@@ -6,7 +6,7 @@ const styles = {
     
     leftBranch: {
         container: {
-            width: '40%'
+            width: '50%'
         },
         iconSegment: {
             width: '16px',
@@ -25,7 +25,7 @@ const styles = {
     
     rightBranch: {
         container: {
-            width: '60%',
+            width: '50%',
             padding: '10px 0px 0px 10px'
         }
     }

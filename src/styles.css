@@ -4,3 +4,27 @@
 div#root div div:nth-child(2) div div:first-child a {
     height: 50px !important;
 }
+
+/* Custom Styles */
+
+.FileInputToggle-enter {
+    opacity: 0.01;
+    height: 1px;
+}
+
+.FileInputToggle-enter.FileInputToggle-enter-active {
+    opacity: 1;
+    height: 90px;
+    transition: all .5s ease-in;
+}
+
+.FileInputToggle-leave {
+    opacity: 1;
+    height: 90px;
+}
+
+.FileInputToggle-leave.FileInputToggle-leave-active {
+    opacity: 0.01;
+    height: 1px;
+    transition: all 0.3s ease-in;
+}

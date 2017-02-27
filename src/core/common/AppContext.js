@@ -23,6 +23,7 @@ class AppContext {
         config.settings = this._emptyObjectIfNonExistant(config.settings);
         config.settings.main = this._emptyObjectIfNonExistant(config.settings.main);
         config.settings.robot_actions = this._emptyObjectIfNonExistant(config.settings.robot_actions);
+        config.settings.notifications = this._emptyObjectIfNonExistant(config.settings.notifications);
 
         // merge settings
         this.app = {
@@ -31,6 +32,12 @@ class AppContext {
             CONFIG_PATH: path.join(rootPath, CONFIG_FILE_NAME),
             ENABLE_WINCTL: this._setValue(config.settings.robot_actions.enableWinctl, true),
             DELAY_PRESET: this._setValue(config.settings.robot_actions.delayPreset, 'normal')
+        };
+        
+        this.notifications = {
+            ENABLE_DESKTOP_NOTIFICATION: this._setValue(config.settings.notifications.enableDesktopNotifications, true),
+            ENABLE_SOUND_NOTFICIATION: this._setValue(config.settings.notifications.enableSoundNotficiations, true),
+            SOUND_NOTIFICATION_FILE: this._setValue(config.settings.notifications.soundNotificationFile, './public/media/tuturu.mp3')
         };
         
         this.ui = {
@@ -66,6 +73,11 @@ class AppContext {
                 robot_actions: {
                     enableWinctl: this.app.ENABLE_WINCTL,
                     delayPreset: this.app.DELAY_PRESET
+                },
+                notifications: {
+                    enableDesktopNotifications: this.notifications.ENABLE_DESKTOP_NOTIFICATION,
+                    enableSoundNotficiations: this.notifications.ENABLE_SOUND_NOTFICIATION,
+                    soundNotificationFile: this.notifications.SOUND_NOTIFICATION_FILE
                 }
             }
         }));

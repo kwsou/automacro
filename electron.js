@@ -9,9 +9,9 @@ function createWindow() {
     // Create the browser window.
     mainWindow = new BrowserWindow({
         show: false,
-        width: 850,
+        width: 950,
         height: 500,
-        minWidth: 825,
+        minWidth: 950,
         minHeight: 475,
         frame: false
     });
