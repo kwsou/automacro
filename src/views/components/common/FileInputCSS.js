@@ -16,7 +16,7 @@ const styles = {
     leftBranch: {
         container: {
             width: '190px',
-            padding: "0px 5px"
+            padding: "0px"
         },
         input: {
             width: '100%'
@@ -26,7 +26,7 @@ const styles = {
     rightBranch: {
         container: {
             width: '85px',
-            padding: '30px 0px'
+            padding: '30px 0px 0px 12px'
         },
         button: {
             width: '85px',

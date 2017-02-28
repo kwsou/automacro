@@ -65,6 +65,7 @@ class ViewContent extends React.Component {
                         placeholder={this.props.placeholder}
                         onChange={this.onInputChange.bind(this)}
                         defaultValue={this.props.defaultValue}
+                        title={this._currentFile}
                     />
                 </View>
                 <View style={styles.rightBranch.container}>
