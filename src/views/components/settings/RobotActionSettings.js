@@ -6,10 +6,8 @@ import {
     Radio
 } from 'react-desktop/windows';
 
-let AppContext      = REQUIRE_LOCAL('core/common/AppContext');
-let ContentView     = REQUIRE_LOCAL('views/components/common/ContentView');
-let InputEntry      = REQUIRE_LOCAL('views/components/common/InputEntry');
-let InputContainer  = REQUIRE_LOCAL('views/components/common/InputContainer');
+let AppContext          = REQUIRE_LOCAL('core/common/AppContext');
+let CommonComponents    = REQUIRE_LOCAL('views/components/common');
 
 const delayPresets = [
     { label: 'Normal', value: 'normal' },
@@ -33,20 +31,20 @@ class RobotActionSettings extends React.Component {
     
     render() {
         return (
-            <ContentView>
-                <InputEntry title="Windows Control" desc="Automatically toggle the active process to the game before every programmed mouse click or key stroke.">
-                    <InputContainer>
+            <CommonComponents.ContentView>
+                <CommonComponents.InputEntry title="Windows Control" desc="Automatically toggle the active process to the game before every programmed mouse click or key stroke.">
+                    <CommonComponents.InputContainer>
                         <Checkbox
                             label="Enable Winctl"
                             onChange={this.onWinctlChange}
                             defaultChecked={AppContext.app.ENABLE_WINCTL}
                         />
-                    </InputContainer>
-                </InputEntry>
+                    </CommonComponents.InputContainer>
+                </CommonComponents.InputEntry>
                 
-                <InputEntry title="Delay Preset" desc="This affects the delay inbetween programmed mouse click and key strokes" layout="horizontal">
+                <CommonComponents.InputEntry title="Delay Preset" desc="This affects the delay inbetween programmed mouse click and key strokes" layout="horizontal">
                     {delayPresets.map(preset => (
-                        <InputContainer key={"radio_delay_preset_" + preset.value}>
+                        <CommonComponents.InputContainer key={"radio_delay_preset_" + preset.value}>
                             <Radio
                                 label={preset.label}
                                 name="radio_delay_preset"
@@ -54,10 +52,10 @@ class RobotActionSettings extends React.Component {
                                 defaultValue={preset.value}
                                 defaultChecked={AppContext.app.DELAY_PRESET == preset.value}
                             />
-                        </InputContainer>
+                        </CommonComponents.InputContainer>
                     ))}
-                </InputEntry>
-            </ContentView>
+                </CommonComponents.InputEntry>
+            </CommonComponents.ContentView>
         );
     }
 }

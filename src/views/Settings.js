@@ -7,28 +7,25 @@ import {
     MasterDetailsViewItemDetails
 } from 'react-desktop/windows';
 
-let AppContext              = REQUIRE_LOCAL('core/common/AppContext');
-let MainSettings            = REQUIRE_LOCAL('views/components/settings/MainSettings');
-let RobotActionSettings     = REQUIRE_LOCAL('views/components/settings/RobotActionSettings');
-let NotificationSettings    = REQUIRE_LOCAL('views/components/settings/NotificationSettings');
-let LoggingSettings         = REQUIRE_LOCAL('views/components/settings/LoggingSettings');
+let AppContext  = REQUIRE_LOCAL('core/common/AppContext');
+let Views       = REQUIRE_LOCAL('views/components/settings');
 
 const categories = [
     {
         title: 'Main',
-        component: MainSettings,
+        component: Views.MainSettings,
     },
     {
         title: 'Robot Actions',
-        component: RobotActionSettings,
+        component: Views.RobotActionSettings,
     },
     {
         title: 'Notifications',
-        component: NotificationSettings,
+        component: Views.NotificationSettings,
     },
     {
         title: 'Logging',
-        component: LoggingSettings,
+        component: Views.LoggingSettings,
     }
 ];
 

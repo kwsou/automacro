@@ -2,7 +2,7 @@ import React from 'react';
 import { View } from 'react-desktop/windows';
 import styled from 'styled-components';
 
-let styles  = REQUIRE_LOCAL('views/components/common/InputContainerCSS.js');
+import styles from './styles/css';
 
 // common view element that holds one input element
 class InputContainer extends React.Component {
@@ -14,5 +14,7 @@ class InputContainer extends React.Component {
         );
     }
 }
+
+InputContainer.propTypes = {};
 
 export default InputContainer;

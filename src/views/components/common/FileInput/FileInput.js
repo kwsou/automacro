@@ -2,15 +2,14 @@ import electron from 'electron';
 import React from 'react';
 import { TextInput, Button, View } from 'react-desktop/windows';
 
+import styles from './styles/css';
 let AppContext  = REQUIRE_LOCAL('core/common/AppContext');
 let Util        = REQUIRE_LOCAL('core/common/Util');
-let styles      = REQUIRE_LOCAL('views/components/common/FileInputCSS');
 
 // common file input element containing non-editable text input field and browse button
-class ViewContent extends React.Component {
+class FileInput extends React.Component {
     static defaultProps = {
-        label: 'Sample Input Label',
-        placeholder: 'Sample placeholder',
+        placeholder: '',
         defaultValue: '',
         buttonLabel: 'Browse...',
         onChange: function(payload) { payload.commit(); },
@@ -81,6 +80,28 @@ class ViewContent extends React.Component {
             </View>
         );
     }
+    
 }
 
-export default ViewContent;
+FileInput.propTypes = {
+    // label for the text input field
+    label: React.PropTypes.string.isRequired,
+    
+    // placeholder for the text input field when there is no value
+    placeholder: React.PropTypes.string,
+    
+    // default value for the text input field
+    defaultValue: React.PropTypes.string,
+    
+    // label for the "choose file" button
+    buttonLabel: React.PropTypes.string,
+    
+    // callback function invoked when a file has been selected. It has the following signature: callback({ newFile: <string>, commit: <function> }).
+    //  where newFile is the file path of the selected file, and commit must be invoked if we want to persist newFile as the new text input value.
+    onChange: React.PropTypes.func,
+    
+    // an array of object containing file name extension filters for the file selection dialog
+    fileFilters: React.PropTypes.arrayOf(React.PropTypes.object)
+};
+
+export default FileInput;

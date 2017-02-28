@@ -1,11 +1,10 @@
 import React from 'react';
 import { View } from 'react-desktop/windows';
 
-let AppContext = REQUIRE_LOCAL('core/common/AppContext');
-let styles  = REQUIRE_LOCAL('views/components/common/ContentViewCSS');
+import styles from './styles/css';
 
 // common view element that contains a specific margin and padding specification
-class ViewContent extends React.Component {
+class ContentView extends React.Component {
     render() {
         return (
             <View
@@ -21,4 +20,6 @@ class ViewContent extends React.Component {
     }
 }
 
-export default ViewContent;
+ContentView.propTYpes = {};
+
+export default ContentView;

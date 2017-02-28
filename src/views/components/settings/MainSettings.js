@@ -8,10 +8,8 @@ import {
 
 import fs from 'fs-sync';
 
-let AppContext      = REQUIRE_LOCAL('core/common/AppContext');
-let ContentView     = REQUIRE_LOCAL('views/components/common/ContentView');
-let InputEntry      = REQUIRE_LOCAL('views/components/common/InputEntry');
-let InputContainer  = REQUIRE_LOCAL('views/components/common/InputContainer');
+let AppContext          = REQUIRE_LOCAL('core/common/AppContext');
+let CommonComponents    = REQUIRE_LOCAL('views/components/common');
 
 const themes = [
     { label: 'Light', value: 'light' },
@@ -27,10 +25,10 @@ class MainSettings extends React.Component {
     
     render() {
         return (
-            <ContentView>
-                <InputEntry title="Theme" desc="Select a GUI colour theme." layout="horizontal">
+            <CommonComponents.ContentView>
+                <CommonComponents.InputEntry title="Theme" desc="Select a GUI colour theme." layout="horizontal">
                     {themes.map(theme => (
-                        <InputContainer key={"radio_theme_" + theme.value}>
+                        <CommonComponents.InputContainer key={"radio_theme_" + theme.value}>
                             <Radio
                                 label={theme.label}
                                 name="radio_theme"
@@ -38,10 +36,10 @@ class MainSettings extends React.Component {
                                 defaultValue={theme.value}
                                 defaultChecked={AppContext.ui.THEME == theme.value}
                             />
-                        </InputContainer>
+                        </CommonComponents.InputContainer>
                     ))}
-                </InputEntry>
-            </ContentView>
+                </CommonComponents.InputEntry>
+            </CommonComponents.ContentView>
         );
     }
 }
