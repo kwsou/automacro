@@ -5,6 +5,7 @@ import { View, Checkbox } from 'react-desktop/windows';
 import styles from './styles/css';
 let AppContext          = REQUIRE_LOCAL('core/common/AppContext');
 let CommonComponents    = REQUIRE_LOCAL('views/components/common');
+let cssTransitionStyle  = REQUIRE_LOCAL('views/override/ReactCSSTransitionGroup/css');
 
 // common file input element with a checkbox parent that enables or disables on toggle
 class FileInputToggle extends React.Component {
@@ -34,7 +35,7 @@ class FileInputToggle extends React.Component {
                         onChange={this.checkboxOnChange.bind(this)}
                         defaultChecked={this.props.checkboxDefaultChecked}
                     />
-                    <ReactCSSTransitionGroup transitionName="FileInputToggle" transitionEnterTimeout={500} transitionLeaveTimeout={300}>
+                    <ReactCSSTransitionGroup style={cssTransitionStyle.container} transitionName="FileInputToggle" transitionEnterTimeout={500} transitionLeaveTimeout={300}>
                         {this.state.enabled ?
                             <CommonComponents.FileInput
                                 key="file_input"

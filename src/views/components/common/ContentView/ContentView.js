@@ -10,7 +10,6 @@ class ContentView extends React.Component {
             <View
                 layout={styles.container.layout}
                 horizontalAlignment={styles.container.horizontalAlignment}
-                margin={styles.container.margin}
                 padding={styles.container.padding}
                 width={styles.container.width}
             >

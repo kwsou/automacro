@@ -24,6 +24,7 @@ class AppContext {
         config.settings.main = this._emptyObjectIfNonExistant(config.settings.main);
         config.settings.robot_actions = this._emptyObjectIfNonExistant(config.settings.robot_actions);
         config.settings.notifications = this._emptyObjectIfNonExistant(config.settings.notifications);
+        config.settings.logging = this._emptyObjectIfNonExistant(config.settings.logging);
 
         // merge settings
         this.app = {
@@ -48,6 +49,12 @@ class AppContext {
             TEXT_COLOUR: '#000000'
         };
         
+        this.logging = {
+            ENABLE_LOGGING: this._setValue(config.settings.logging.enableLogging, false),
+            USE_SINGLE_LOG_FILE: this._setValue(config.settings.logging.useSingleLogFile, true),
+            SINGLE_LOG_FILE: this._setValue(config.settings.logging.singleLogFile, './logging/automacro.log')
+        }
+        
         this.env = {
             NODE_ENV: NODE_ENV,
             IS_DEV_MODE: NODE_ENV == 'development' || process.execPath.match(/[\\/]electron/).length > 0
@@ -71,6 +78,11 @@ class AppContext {
                     enableDesktopNotifications: this.notifications.ENABLE_DESKTOP_NOTIFICATION,
                     enableSoundNotficiations: this.notifications.ENABLE_SOUND_NOTFICIATION,
                     soundNotificationFile: this.notifications.SOUND_NOTIFICATION_FILE
+                },
+                logging: {
+                    enableLogging: this.logging.ENABLE_LOGGING,
+                    useSingleLogFile: this.logging.USE_SINGLE_LOG_FILE,
+                    singleLogFile: this.logging.SINGLE_LOG_FILE
                 }
             }
         }));

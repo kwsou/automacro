@@ -28,3 +28,21 @@ div#root div div:nth-child(2) div div:first-child a {
     height: 1px;
     transition: all 0.3s ease-in;
 }
+
+.OptionToggle-enter {
+    opacity: 0.01;
+}
+
+.OptionToggle-enter.OptionToggle-enter-active {
+    opacity: 1;
+    transition: opacity .5s ease-in;
+}
+
+.OptionToggle-leave {
+    opacity: 1;
+}
+
+.OptionToggle-leave.OptionToggle-leave-active {
+    opacity: 0.01;
+    transition: opacity 0.3s ease-in;
+}
