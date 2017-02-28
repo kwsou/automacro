@@ -54,14 +54,7 @@ class AppContext {
         };
         
         // re-calculate some settings from the merge
-        switch(this.ui.THEME) {
-            case 'dark':
-                this.ui.TEXT_COLOUR = '#FFFFFF';
-                break;
-            case 'light':
-            default:    // fall through
-                break;
-        }
+        this.setTheme(this.ui.THEME);
     }
     
     exportConfig = function() {        
@@ -81,6 +74,19 @@ class AppContext {
                 }
             }
         }));
+    }
+    
+    setTheme = function(newTheme) {
+        switch(newTheme) {
+            case 'dark':
+                this.ui.TEXT_COLOUR = '#FFFFFF';
+                break;
+            case 'light':
+            default:    // fall through
+                this.ui.TEXT_COLOUR = '#000000';
+                break;
+        }
+        this.ui.THEME = newTheme;
     }
     
     // sets prop to a specific value if it exists, or uses a default one if not

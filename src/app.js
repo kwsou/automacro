@@ -44,6 +44,20 @@ class App extends React.Component {
         
         // retrieve config file and load settings onto memory via AppContext
         AppContext.importConfig(path.join(__dirname, '..'));
+        
+        this.state = {
+            theme: AppContext.ui.THEME
+        };
+        
+        // set global event listeners
+        electron.remote.ipcMain.on('themeChange', function(evt, payload) {
+            if(payload.theme != this.state.theme) {
+                AppContext.setTheme(payload.theme);
+                AppContext.exportConfig();
+                
+                this.setState({ theme: payload.theme })
+            }
+        }.bind(this));
     }
     
     toggleMaximize = function() {

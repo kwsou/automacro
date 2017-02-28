@@ -1,4 +1,4 @@
-import electron from 'electron';
+import { ipcRenderer } from 'electron';
 import React from 'react';
 import {
     View,
@@ -19,14 +19,10 @@ const themes = [
 ];
 
 class MainSettings extends React.Component {
-    onThemeChange = (evt) => {
-        var theme = evt.target.value;
-        
-        if(theme != AppContext.ui.THEME) {
-            AppContext.ui.THEME = evt.target.value;
-            AppContext.exportConfig();
-            electron.remote.getCurrentWindow().reload();
-        }
+    onThemeChange(evt) {
+        ipcRenderer.send('themeChange', {
+            theme: evt.target.value
+        });
     }
     
     render() {
