@@ -9,19 +9,18 @@ if(argv.config) {
     config = require(argv.config);
 }
 
-ar.start(config).then(function() {
-    notifier.notify({
-      'title': 'Automacro',
-      'message': 'Just finished all crafts'
-    });
-    
+ar.start(config).then(function() {    
     player.play('./public/media/tuturu.mp3', function(err) {
-        notifier.notify({
-            'title': 'Automacro',
-            'message': 'Just finished all crafts'
-        }, function(err, resp) { 
-            log.writeLine('Ending process.');
-            process.exit();
-        });
+      if(err) {
+        log.writeLine('[Error] Playing sound file: ' + err);
+      }
+      
+      notifier.notify({
+        'title': 'Automacro',
+        'message': 'Just finished all crafts'
+      }, function(err, resp) { 
+        log.writeLine('Ending process.');
+        process.exit();
+      });
     });
 });

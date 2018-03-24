@@ -1,0 +1,20 @@
+{
+    "numDesynth": 25,
+    "topLeftDesynth": {
+        "x": 2049,
+        "y": 481
+    },
+
+    "desynthCommandIndex": 6,
+
+    "isUniqueUntradable": true,
+    "confirmUniqueUntradable": {
+        "x": 1848,
+        "y": 948
+    },
+
+    "confirmDesynth": {
+        "x": 1934,
+        "y": 979
+    }
+}

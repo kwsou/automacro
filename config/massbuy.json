@@ -1,0 +1,19 @@
+{
+    "numBuy": 18,
+    "itemBuy": {
+        "x": 1185,
+        "y": 668
+    },
+    "confirmExchange": {
+        "x": 1368,
+        "y": 813
+    },
+    "itemRequest": {
+        "x": 1158,
+        "y": 653
+    },
+    "confirmTrade": {
+        "x": 1192,
+        "y": 698
+    }
+}

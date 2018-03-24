@@ -1,4 +1,5 @@
 var log = require('./log');
+var robot = require('robotjs');
 var promise = require('bluebird');
 var prompt = require('prompt');
 var winctl = require('winctl');
@@ -26,6 +27,34 @@ var swapFocusedWindow = function(onSwapCallback, onSwapCallbackArgs) {
         });
     });
 };
+
+var getMousePosition = function(intentDescription) {
+    return new promise(function(resolve) {
+        log.writeLine(intentDescription);
+        var attempt = function() {
+            _getMousePosition().then(function(tentativePosition) {
+                promptForBoolean('Is (' + tentativePosition.x + ',' + tentativePosition.y + ') correct?').then(function(isCorrectPosition) {
+                    if(isCorrectPosition) {
+                        resolve(tentativePosition);
+                    } else {
+                        attempt();
+                    }
+                });
+            });
+        };
+        attempt();
+    });
+};
+
+var _getMousePosition = function() {
+    return new promise(function(resolve) {
+        log.write('Getting mouse position in: ');
+        startCountdown(3000, function() {
+            var mousePos = robot.getMousePos();
+            resolve(mousePos);
+        });
+    });
+}
 
 var startCountdown = function(duration, callback, callbackArgs) {
     _cd(duration, 1000, callback, callbackArgs);
@@ -93,6 +122,7 @@ var _prompt = function(schema, message, delimiter, convertFn) {
 
 // expose public methods
 exports.swapFocusedWindow = swapFocusedWindow;
+exports.getMousePosition = getMousePosition;
 exports.startCountdown = startCountdown;
 exports.promptForString = promptForString;
 exports.promptForNumber = promptForNumber;
